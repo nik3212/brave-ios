@@ -140,9 +140,9 @@ class BraveShieldsAndPrivacySettingsController: TableViewController {
         return Section(
             header: .title(Strings.clearPrivateData),
             rows: clearables.indices.map { idx in
-                Row(text: self.clearables[idx].clearable.label, accessory: .switchToggle(value: self.toggles[idx], { [unowned self] checked in
-                    self.toggles[idx] = checked
-                }))
+                Row(text: self.clearables[idx].clearable.label, accessory: .view(SwitchAccessoryView(initialValue: self.toggles[idx], valueChange: { [weak self] isOn in
+                    self?.toggles[idx] = isOn
+                })))
             } + [
                 Row(text: Strings.clearDataNow, selection: { [unowned self] in
                     self.tappedClearPrivateData()
